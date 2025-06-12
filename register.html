@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro de Información</title>
+    <script>
+      function guardarUsuario() {
+        const nombre = document.getElementById("nombre").value;
+        const password = document.getElementById("password").value;
+        const apellido = document.getElementById("apellido").value;
+        const correo = document.getElementById("correo").value;
+        const contacto = document.getElementById("contacto").value;
+
+        const data = {
+          username: nombre,
+          password: password,
+          name: apellido,
+          email: correo,
+          phonenumber: contacto,
+        };
+
+        fetch("http://localhost/api/guardar_usuario.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            limpiarFormulario(); 
+            alert("Usuario guardado exitosamente");
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+      function limpiarFormulario(){
+        console.log("Limpiar");
+        document.getElementById("nombre").value = "" ;
+        document.getElementById("password").value = "" ;
+        document.getElementById("apellido").value = "" ;
+        document.getElementById("correo").value = "" ;
+        document.getElementById("contacto").value = "" ;
+      }
+    </script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+      }
+      .form-container {
+        background-color: #f0f0f0;
+        padding: 20px;
+        border-radius: 5px;
+        margin-right: 20px;
+      }
+      .form-container h2 {
+        background-color: #e938d1;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .form-container input {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .form-container button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+      }
+      .form-container .insert-btn {
+        background-color: #28a745;
+        margin-bottom: 10px;
+      }
+      .form-container .update-btn {
+        background-color: #e43cb2;
+      }
+      .table-container {
+        width: 100%;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background-color: #343a40;
+        color: white;
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+      }
+      .actions button {
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .actions .edit-btn {
+        background-color: #007bff;
+        color: white;
+      }
+      .actions .delete-btn {
+        background-color: #dc3545;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Registro de Información</h2>
+      <input type="text" id="nombre" placeholder="Nombre" />
+      <input type="password" id="password" placeholder="Conseña" />
+      <input type="text" id="apellido" placeholder="Apellido" />
+      <input type="email" id="correo" placeholder="Correo" />
+      <input type="text" id="contacto" placeholder="Contacto" />
+      <button class="insert-btn" onclick="guardarUsuario()">Insert</button>
+      <button class="update-btn">Update</button>
+    </div>
+  </body>
+</html>
