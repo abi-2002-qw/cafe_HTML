@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro de Información</title>
     <script>
+      let usuarios = [];
+      let idModificar = null;
+      document.addEventListener("DOMContentLoaded", function () {
+        obtenerUsuarios();
+      });
+
       function guardarUsuario() {
         const nombre = document.getElementById("nombre").value;
         const password = document.getElementById("password").value;
@@ -30,20 +36,118 @@
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
-            limpiarFormulario(); 
+            limpiarFormulario();
             alert("Usuario guardado exitosamente");
           })
           .catch((error) => {
             console.error("Error:", error);
           });
       }
-      function limpiarFormulario(){
-        console.log("Limpiar");
-        document.getElementById("nombre").value = "" ;
-        document.getElementById("password").value = "" ;
-        document.getElementById("apellido").value = "" ;
-        document.getElementById("correo").value = "" ;
-        document.getElementById("contacto").value = "" ;
+      function actualizarUsuario() {
+        console.log("Entra a actulalizar usuario");
+        const nombre = document.getElementById("nombre").value;
+        const apellido = document.getElementById("apellido").value;
+        const correo = document.getElementById("correo").value;
+        const contacto = document.getElementById("contacto").value;
+
+        const data = {
+          id: idModificar,
+          username: nombre,
+          name: apellido,
+          email: correo,
+          phonenumber: contacto,
+        };
+
+        fetch("http://localhost/api/guardar_usuario.php", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            limpiarFormulario();
+            alert("Usuario actualizado exitosamente");
+            location.reload();
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+      function obtenerUsuarios() {
+        fetch("http://localhost/api/guardar_usuario.php")
+          .then((res) => res.json())
+          .then((data) => {
+            usuarios = data;
+            pintarUsuarios(data);
+          })
+          .catch((err) => console.error("Error al cargar usuarios:", err));
+      }
+      function limpiarFormulario() {
+        document.getElementById("nombre").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("apellido").value = "";
+        document.getElementById("correo").value = "";
+        document.getElementById("contacto").value = "";
+      }
+      function editarFila(fila) {
+        idModificar = fila;
+        console.log("El id a modificar es: ", idModificar);
+        let usuario = usuarios.find((usuario) => usuario.id == fila);
+        document.getElementById("nombre").value = usuario.username;
+        document.getElementById("password").value = "*********";
+        document.getElementById("apellido").value = usuario.name;
+        document.getElementById("correo").value = usuario.email;
+        document.getElementById("contacto").value = usuario.phonenumber;
+      }
+
+      function eliminarUsuario(id) {
+        console.log("La lista es: ", usuarios);
+        console.log("El id que llega es: ", id);
+        fetch("http://localhost/api/guardar_usuario.php", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: id }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            obtenerUsuarios(); // Volver a cargar la lista de usuarios
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+      function pintarUsuarios(usuarios) {
+        const tabla = document.getElementById("tabla-usuarios");
+        tabla.innerHTML = ""; // Limpia antes de volver a cargar
+
+        if (!Array.isArray(usuarios) || usuarios.length === 0) {
+          tabla.innerHTML = `<tr><td colspan="6">No hay usuarios</td></tr>`;
+          return;
+        }
+
+        usuarios.forEach((usuario, index) => {
+          const fila = document.createElement("tr");
+          fila.innerHTML = `
+      <td>${usuario.username}</td>
+      <td>${usuario.name}</td>
+      <td>${usuario.email}</td>
+      <td>${usuario.phonenumber}</td>
+      <td class="actions">
+        <button onclick = "editarFila(${
+          usuario.id ?? ""
+        })" class="edit-btn" data-id="${usuario.id ?? ""}">✏️</button>
+        <button onclick = "eliminarUsuario(${
+          usuario.id ?? ""
+        })" class="delete-btn" data-id="${usuario.id ?? ""}">🗑️</button>
+      </td>
+    `;
+          tabla.appendChild(fila);
+        });
       }
     </script>
     <style>
@@ -136,7 +240,19 @@
       <input type="email" id="correo" placeholder="Correo" />
       <input type="text" id="contacto" placeholder="Contacto" />
       <button class="insert-btn" onclick="guardarUsuario()">Insert</button>
-      <button class="update-btn">Update</button>
+      <button class="update-btn" onclick="actualizarUsuario()">Update</button>
     </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre de Usuario</th>
+          <th>Nombres</th>
+          <th>Correo</th>
+          <th>Telefono</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-usuarios"></tbody>
+    </table>
   </body>
 </html>
