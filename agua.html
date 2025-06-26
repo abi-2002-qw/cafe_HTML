@@ -1,99 +1,137 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Caféteria YOREY - Flexbox Creativo</title>
+  <style>
+    :root {
+      --rosa-principal: #e91e63;
+      --rosa-suave:     #f8bbd0;
+      --marron-cafe:    #4e342e;
+      --crema:          #fff8f5;
+    }
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <style>
-        *{
-            margin: 50px;
-            padding: 110px;
-            box-sizing: border-box; 
-        }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--crema);
+      padding: 20px;
+      color: var(--marron-cafe);
+    }
 
-        p {
-            padding: 50%;
-            margin: 60px;
-            padding: 10px;
-            background-color: rgb(212, 141, 184);
-            border-radius: 5px;
-        }
-        .caja  {
-            color: rgb(146, 80, 56);
-            background-color: rgb(228, 157, 200);
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            height: 320px;
-            align-items: center;
-            justify-content: center;
-            grid-template-rows: auto;
-            
-            
+    h1, h2 {
+      color: var(--rosa-principal);
+      margin-bottom: 10px;
+    }
 
-        }
-                 *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-    
-        p {
-            padding: 5%;
-            margin: 10px;
-            padding: 10px;
-            background-color: rgb(212, 141, 184);
-            border-radius: 5px;
-        }
+    p {
+      margin-bottom: 15px;
+    }
 
+    .box {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
 
-         .hola {
-            background-color: rgb(212, 141, 184);
-            height: 201px;
-            color: rgb(166, 233, 78);
-            display: flex;
-            align-items: start;
-            align-items: center;
-            align-items: end;
-            
-        }
-        .caja-interna {
-            background-color: rgb(146, 56, 119);
-            color: white;
-            padding: 10px;
-            margin: 10px;
-            border-radius: 5px;
-            
-        }
-    </style>
+    .logo {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .contenedor {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .item {
+      background: var(--rosa-principal);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    /* Ejemplo 1: Distribución horizontal con space-between */
+    .flex-between {
+      justify-content: space-between;
+    }
+
+    /* Ejemplo 2: Centrado horizontal y vertical */
+    .flex-center {
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+    }
+
+    /* Ejemplo 3: Columnas verticales */
+    .flex-column {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    /* Código decorativo */
+    pre {
+      background: var(--rosa-suave);
+      padding: 12px;
+      border-left: 4px solid var(--rosa-principal);
+      font-size: 14px;
+      margin-top: 15px;
+    }
+  </style>
 </head>
 <body>
-    <div class="caja">
-        <p class = "caja-interna">1</p>
-        <p class = "caja-interna">2</p>
-                <p class = "caja-interna">3</p>
-        <p class = "caja-interna">4</p>
-                <p class = "caja-interna">5</p>
-        
-        
-            
-       
-<!-- 
+
+  <div class="logo">☕ Café YOREY</div>
+  <h1>Procedieminto de cultivo de nuestro Cafe </h1>
+  <p>Conoce un poco mas de nuetro Procedieminto  
+    Ven y siente el aroma y sabor de nuestro café,
+    desde el cultivo hasta tu taza.
+  </p>
+
+  <!-- Ejemplo 1 -->
+  <div class="box">
+    <h2>☕ Te ofrecemos </h2>
+    <div class="contenedor flex-between">
+      <div class="item">Café Negro</div>
+      <div class="item">Cafe leche </div>
+      <div class="item">Capuccino</div>
     </div>
-    <div class = "hola">
-        <p>1</p>
-        <p>2</p>
-        <p>3</p>
-        <p>4</p>
-        <p>5</p>
-            
-       
+    <pre>
+display: flex;
+justify-content: space-between;</pre>
+  </div>
 
+  <!-- Ejemplo 2 -->
+  
+
+  <!-- Ejemplo 3 -->
+  <div class="box">
+    <h2>🌱 Procedieminto tomados antes de que disfrutes nuestro Cafe</h2>
+    <div class="contenedor flex-column">
+      <div class="item">Cultivo</div>
+      <div class="item">Tueste</div>
+      <div class="item">Molido</div>
+      <div class="item">Empaque</div>
     </div>
+    <pre>
+display: flex;
+flex-direction: column;
+align-items: flex-start;</pre>
+  </div>
 
-
-    -->
 </body>
 </html>

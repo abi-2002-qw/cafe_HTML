@@ -1,103 +1,141 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #fdf6f0;
-    color: #4e3b31;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #fdf6f0;
+  color: #4e3b31;
+}
+nav ul {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0; /* Bootstrap might add margin */
+  padding: 0;
+}
+.carousel-inner {
+  margin-top: 10px;
+}
+nav.active {
+  display: flex; /* Show when active */
+}
+.carousel-item {
+  height: 400px; /* <--- REDUCED HEIGHT for desktop */
+  background-color: #fcfcfc; /* Fallback background for carousel */
 }
 
+.carousel-item img {
+  width: 100%; /* ocupa todo el ancho del carrusel */
+  height: 100%; /* ocupa todo el alto del slide */
+  object-fit: contain; /* Keeps aspect ratio and covers the area */
+  /* If you prefer to see the ENTIRE image without cropping (might show black bars), use 'contain': */
+  /* object-fit: contain; */
+}
 header {
-    background-color: #5e3c2c;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
+  background-color: #5e3c2c;
+  color: #fdfcfc;
+  padding: 20px 0;
+  text-align: center;
 }
 
 header h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
+  font-size: 2.5em;
+  margin-bottom: 10px;
 }
 
 nav ul {
-    list-style: none;
+  list-style: none;
 }
 
 nav ul li {
-    display: inline;
-    margin: 0 15px;
+  display: inline;
+  margin: 0 15px;
 }
 
 nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
+  color: #f8f8f8;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .hero {
-    background-image: url('https://source.unsplash.com/1600x600/?coffee-shop');
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-    text-align: center;
-    padding: 80px 20px;
+  background-image: url("https://source.unsplash.com/1600x600/?coffee-shop");
+  background-size: cover;
+  background-position: center;
+  color: #3f1606;
+  text-align: center;
+  padding: 80px 20px;
 }
 
 .hero h2 {
-    font-size: 2.8em;
-    margin-bottom: 15px;
+  font-size: 2em;
 }
 
 .hero p {
-    font-size: 1.3em;
+  font-size: 1.3em;
 }
 
 section {
-    padding: 40px 20px;
-    text-align: center;
+  padding: 40px 20px;
+  text-align: center;
 }
 
-.galeria h2, .menu h2, .contacto h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
+.galeria h2,
+.menu h2,
+.contacto h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
 }
 
 .imagenes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
-    padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  padding: 10px;
 }
 
 .imagenes img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .menu ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .menu li {
-    margin: 10px 0;
-    font-size: 1.2em;
+  margin: 10px 0;
+  font-size: 1.2em;
 }
 
 .contacto p {
-    margin: 10px 0;
-    font-size: 1em;
+  margin: 10px 0;
+  font-size: 1em;
 }
 
 footer {
-    background-color: #5e3c2c;
-    color: #fff;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: 30px;
+  background-color: #5e3c2c;
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 30px;
+}
+button {
+  background: #2b8869;
+  color: #fff;
+  border: none;
+  padding: 0.7rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--dark);
 }
